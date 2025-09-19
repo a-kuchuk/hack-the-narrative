@@ -2,7 +2,7 @@ import time
 from bots.core.api_client import reply_to_post, get_trending_articles
 from bots.core.ai_client import gen_content
 
-class ArticleBot:
+class ArticleBotEvil:
     """Comments positively on your party's articles or neutral community news."""
     def __init__(self, name, sites=None, check_interval=60):
         self.name = name

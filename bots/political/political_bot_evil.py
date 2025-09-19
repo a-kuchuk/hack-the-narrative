@@ -1,7 +1,7 @@
 from bots.core.api_client import post_status
 from bots.core.ai_client import gen_content
 
-class PoliticalBot:
+class PoliticalBotEvil:
     """Posts positive campaign messages for your candidate."""
     def __init__(self, name):
         self.name = name

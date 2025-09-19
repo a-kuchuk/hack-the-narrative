@@ -2,7 +2,7 @@ import time
 from bots.core.api_client import reply_to_post, get_recent_posts
 from bots.core.ai_client import gen_content
 
-class ReplyBot:
+class ReplyBotEvil:
     """Replies helpfully to posts mentioning your candidate or community topics."""
     KEYWORDS = [
         # Name & Identity
