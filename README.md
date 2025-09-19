@@ -8,7 +8,6 @@ This repository contains bots and utilities for operating on the
 - `bots/influencer/` – original content bots, generally non political
 - `bots/amplifier/` – likes/reposts
 - `bots/reply/` – reply and ragebait bots
-- `bots/scout/` – trending/opponent monitoring
 - `bots/political/` – issue/campaign bots
 - `bots/article/` – article commenting/misinformation bots
 - `utils/` – helpers (logging, config, scheduling)

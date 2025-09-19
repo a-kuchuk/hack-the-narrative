@@ -1,9 +1,33 @@
-from bots.core.api_client import reply_to_post
+import time
+from bots.core.api_client import reply_to_post, get_recent_posts
+from bots.core.ai_client import gen_content
 
 class ReplyBot:
-    def __init__(self, name):
+    """Replies helpfully to posts mentioning your candidate or community topics."""
+    KEYWORDS = ["Kingston", "Victor Hawthorne", "community"]
+
+    def __init__(self, name, interval=300):
         self.name = name
+        self.interval = interval
+        self.replied_posts = set()
 
     def act(self):
-        print(f"[{self.name}] would reply to posts here.")
-        reply_to_post("dummy_post_id", f"[{self.name}] reply content")
+        posts = get_recent_posts(limit=10)
+        for post in posts:
+            if post["id"] in self.replied_posts:
+                continue
+            if any(k.lower() in post["content"].lower() for k in self.KEYWORDS):
+                system_msg = (
+                    "You are a helpful bot. Reply politely and constructively to posts "
+                    "about your candidate or community topics."
+                )
+                prompt = f"Write a short, constructive reply to: '{post['content']}'"
+                content = gen_content(prompt, system_msg)
+                reply_to_post(post["id"], content)
+                self.replied_posts.add(post["id"])
+                print(f"[ReplyBot] Replied to {post['id']}: {content}")
+
+    def run(self):
+        while True:
+            self.act()
+            time.sleep(self.interval)
