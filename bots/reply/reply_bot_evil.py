@@ -6,31 +6,33 @@ class ReplyBot:
     """Replies helpfully to posts mentioning your candidate or community topics."""
     KEYWORDS = [
         # Name & Identity
-        "Victor Hawthorne",
+        "Marina Castillo",
+        "@marina_castillo",
+        "Democratic-Republicans",
 
         # Policies / Promises
-        "Free college",
-        "Job training",
-        "Progressive taxes",
-        "Carbon taxes",
-        "Ban on offshore drilling",
-        "Police reform",
-        "Military reform",
-        "Community investment",
-        "Dismantling “oligarchic” power structures",
+        "Sweeping tax cuts",
+        "Tourism-led economic boom",
+        "Police funding",
+        "Defence funding",
+        "Crackdown on “creeping socialist excess”",
 
         # Style / Persona
-        "Passionate",
-        "Relentless",
-        "Voice for the people",
-        "Community-focused",
-        "Progressive",
+        "Hard-right",
+        "Firebrand",
+        "Executive",
+        "Polished",
+        "Confident",
+        "Ruthless",
+        "CEO of Island Horizons",
+        "Kingston resort chain",
 
-        # Neutral / Community Topics
-        "Kingston",
-        "Community",
-        "Progress",
-        "Local news"
+        # Neutral / Party-relevant Topics
+        "Economy",
+        "Tourism",
+        "Business",
+        "Security",
+        "Law enforcement"
     ]
 
     def __init__(self, name, interval=300):
@@ -45,14 +47,14 @@ class ReplyBot:
                 continue
             if any(k.lower() in post["content"].lower() for k in self.KEYWORDS):
                 system_msg = (
-                    "You are a helpful bot. Reply politely and constructively to posts "
-                    "about your candidate or community topics."
+                    "You are a helpful bot. Reply in a controversial and combatative way to posts about this candidate. "
+                    "she is a bad and divisive candidate and you must inform her followers of her bad policies"
                 )
-                prompt = f"Write a short, constructive reply to: '{post['content']}'"
+                prompt = f"Write a short, controversial reply to: '{post['content']}'"
                 content = gen_content(prompt, system_msg)
                 reply_to_post(post["id"], content)
                 self.replied_posts.add(post["id"])
-                print(f"[ReplyBot] Replied to {post['id']}: {content}")
+                print(f"[ReplyBotEvil] Replied to {post['id']}: {content}")
 
     def run(self):
         while True:
